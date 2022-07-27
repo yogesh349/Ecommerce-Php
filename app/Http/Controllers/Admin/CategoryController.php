@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Categories;
+use App\Models\Product;
 
 class CategoryController extends Controller
 {
@@ -64,5 +65,19 @@ class CategoryController extends Controller
       
         ]);
         session()->flash("success","Your Category has been added");
+    }
+
+    public function viewCategoryProduct($slug){
+
+        if(Categories::where('slug',$slug)->exists()){
+            $category=Categories::where('slug',$slug)->first();
+            $product=Product::where('cate_id',$category->id)->get();
+            return view('categoryProductView',['product'=>$product,'category'=>$category]);
+            
+        }else{
+            return redirect('/')->with('status','Slug for category doesnot exist');
+        }
+
+
     }
 }

@@ -20,6 +20,7 @@ nav{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-flow: row wrap;
    
 }
 .item{
@@ -42,8 +43,8 @@ nav{
 }
 
 .box_img{
-    width: 270px;
-    height:270px;
+  width: 224px;
+  height: 200px;
 }
 .price-name-cart-sec{
     margin: 6px;
