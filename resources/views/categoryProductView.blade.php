@@ -12,19 +12,21 @@
         
         
     @foreach ($product as $item)
+    <a href="{{route('prodcut_details',['slug'=>$item->slug,'id'=>$item->id])}}">
         <div class="item">
           <img src="{{asset('storage/product_image/'.$item->image)}}" alt="" class="box_img">
           <div class="price-name-cart-sec">
             <div class="price-name-sec">
-              <section>{{$item->name}}</section>
-              <div>Rs. {{$item->selling_price}}</div>
+              <section class="text-dark text-decoration-none">{{$item->name}}</section>
+              <div class="text-dark text-decoration-none">Rs. {{$item->selling_price}}</div>
             </div>
             <div class="cart-sec">
-              <a href=""><img src="{{asset("images/cart.png")}}" alt="" width="47px" height="24px"
+              <a href=""><img style="width: 40px;margin-top: 16px;" src="{{asset("images/cart.png")}}" alt="" height="24px"
                   class="cart-box-img"></a>
             </div>
           </div>
         </div>
+    </a>
         @endforeach
 
 
