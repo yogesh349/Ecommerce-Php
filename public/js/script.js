@@ -129,5 +129,32 @@ $(document).ready(function () {
   });
 
 
+ $(".addToWishList").click(function (e) { 
+  e.preventDefault();
+  var product_id=$(".prod_id").val();
+
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  $.ajax({
+    type: "POST",
+    url: "/add-to-wish",
+    data: {
+      'product_id':product_id,
+    },
+    success: function (response) {
+      alert(response.status);
+      
+    }
+  });
+  
+
+  
+ });
+
+
 
 });

@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="col-md">
-                        <button type="button" class="btn btn-success btn-sm mr-4 ">Add to Wishlist <i class="fa fa-heart"></i></button>
+                        <button type="button" class="btn btn-success addToWishList btn-sm mr-4 ">Add to Wishlist <i class="fa fa-heart"></i></button>
                         @if ($product->qty > 0)
                        <button type="button" class="btn btn-primary btn-sm addToCartbtn">Add to Cart <i class="fa fa fa-shopping-cart"></i></button>
                        @endif

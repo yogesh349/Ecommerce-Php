@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,8 +32,14 @@ class CheckoutController extends Controller
         $order->city=$request->input('city');
         $order->pincode=$request->input('pcode');
         $order->tracking_no='yogesh'.rand(1111,9999);
-        $order->save();
         $cartItems=Cart::where('user_id',Auth::id())->get();
+        $total=0;
+        foreach ($cartItems as $item) {
+            $total=$total+$item->product->selling_price;
+        }
+       $order->total_price=$total;
+        $order->save();
+
         foreach ($cartItems as $item) {
             # code...
             OrderItem::create([
@@ -41,8 +48,16 @@ class CheckoutController extends Controller
                 'qty'=>$item->prod_qty,
                 'price'=>$item->product->selling_price,
             ]);
+
+           
+
+            $prod = Product::where('id',$item->prod_id)->first();
+            $prod->qty=$prod->qty-$item->prod_qty;
+            $prod->update();
           
         }
+
+ 
 
         if(Auth::user()->address1==Null){
             $user=User::where('id',Auth::id())->first();
@@ -62,6 +77,10 @@ class CheckoutController extends Controller
 
                 
         }
+
+        $cartItems=Cart::where('user_id',Auth::id())->get();
+        Cart::destroy($cartItems);
+
 
         
     }

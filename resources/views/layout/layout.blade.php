@@ -56,7 +56,7 @@
         </form>
       </div>
       <div class="thrid_sec">
-        <a href=""><img src="{{asset('images/cart.png')}}" alt="" width="50px" height="38px"></a>
+        <a href="{{url('/cart')}}"><img src="{{asset('images/cart.png')}}" alt="" width="50px" height="38px"></a>
       </div>
 
       @if (Auth::check())
